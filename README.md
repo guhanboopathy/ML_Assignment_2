@@ -284,6 +284,14 @@ All five trained models are saved as .joblib files.
 The Streamlit application loads these saved models
 to evaluate uploaded test data without retraining.
 
+### Modeling Choices and Rationale
+
+- **Duplicate removal:** The dataset contained 68 exact duplicate records. These were removed before the train-test split to reduce the chance of identical records appearing in both partitions and making test performance look better than it is.
+- **Feature scaling:** Dry Bean features have different numerical scales. StandardScaler was used for Logistic Regression, KNN, and SVM so that large-valued measurements such as Area do not dominate smaller-valued shape measurements simply because of their units. The scaler was fitted only on training data and saved with each model in a pipeline. Decision Tree and Gaussian Naive Bayes were trained without scaling.
+- **Decision Tree complexity:** The tree uses a maximum depth of 12 and requires at least 5 samples to split a node. These settings limit tree complexity and were chosen to reduce overfitting. They are implementation choices, not values established as optimal through a documented hyperparameter search.
+- **KNN neighbors and weighting:** KNN uses five neighbors with Euclidean distance after scaling. Distance weighting gives closer neighbors more influence than farther neighbors. Five neighbors was the selected setting; the project does not claim that it was the best value from a tuning study.
+- **SVM probability calibration:** The RBF SVM produces decision scores. Sigmoid calibration with five cross-validation folds within the training data converts these scores into class probability estimates used for multiclass AUC. With ensemble=False, the final classifier is fitted on the full training partition. The held-out test data is not used to fit the scaler, classifier, or calibrator. Calibration does not by itself guarantee better accuracy or perfectly calibrated probabilities.
+
 ## 5. Model Performance Comparison
 
 All five classifiers were evaluated using the same
