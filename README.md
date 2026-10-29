@@ -188,7 +188,21 @@ The complete project source code, trained classification models,
 dataset files, evaluation results, and Streamlit application
 are maintained in the GitHub repository.
 
-**Repository URL:** [To be added after GitHub repository creation]
+**Repository URL:** [ML_Assignment_2](https://github.com/guhanboopathy/ML_Assignment_2)
+
+**Live application:** [Dry Bean Classification Lab](https://2026ak05428-guhan-boopathy-ml-assignment-2.streamlit.app/)
+
+**Author:** Guhan Boopathy · **BITS ID:** 2026AK05428
+
+### Application features
+
+- Download the held-out test CSV and view the required columns and valid classes.
+- Compare all five saved models on the same uploaded records using six metrics, with the highest scores highlighted.
+- Inspect the selected model’s metrics, confusion matrix, and classification report.
+- Explore actual versus predicted classes and filter misclassified rows.
+- View dataset details and use the test-data sidebar in a consistent light theme.
+
+Evaluation uses saved models without retraining. Results appear in vertically stacked sections.
 
 ## 4. Classification Models Implemented
 
